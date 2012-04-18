@@ -1,5 +1,4 @@
 <?php 
-require_once 'juds/events/EventDispatcher.php';
 
 class Curl extends EventDispatcher
 {
@@ -33,7 +32,7 @@ class Curl extends EventDispatcher
         
         if($pos_params) {
             $this->options[CURLOPT_POST] = true;
-            $this->options[CURLOPT_POSTFIELDS] = join("&", $pos_params);
+            $this->options[CURLOPT_POSTFIELDS] = is_array($pos_params) ?  join("&", $pos_params) : $pos_params;
         }
         
         curl_setopt_array($this->resource, $this->options);
