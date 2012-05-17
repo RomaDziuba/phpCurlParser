@@ -25,8 +25,14 @@ class Curl extends EventDispatcher
         
         $this->options[CURLOPT_URL] = $url;
         
-        if($proxy) {
-            $this->options[CURLOPT_PROXY] = $proxy;
+        if ($proxy) {
+        	
+        	if (is_array($proxy)) {
+        		$this->options[CURLOPT_PROXYTYPE] = $proxy[0];
+        		$this->options[CURLOPT_PROXY] = $proxy[1];
+        	} else {
+        		$this->options[CURLOPT_PROXY] = $proxy;
+        	}
         }
         
         if($proxy_pswd) {
@@ -62,8 +68,13 @@ class Curl extends EventDispatcher
     	
     	$options[CURLOPT_URL] = $url;
     	
-    	if($proxy) {
-    		$options[CURLOPT_PROXY] = $proxy;
+    	if ($proxy) {
+    		if (is_array($proxy)) {
+    			$options[CURLOPT_PROXYTYPE] = $proxy[0];
+    			$options[CURLOPT_PROXY] = $proxy[1];
+    		} else {
+    			$options[CURLOPT_PROXY] = $proxy;
+    		}
     	}
     	
     	if($proxy_pswd) {
