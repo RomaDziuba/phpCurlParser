@@ -35,6 +35,11 @@ class Curl extends EventDispatcher
         	}
         }
 
+
+        if (isset($this->options[CURLOPT_COOKIE]) && is_array($this->options[CURLOPT_COOKIE])) {
+        	$this->options[CURLOPT_COOKIE] = join("; ", $this->options[CURLOPT_COOKIE]);
+        }
+
         if($proxy_pswd) {
             $this->options[CURLOPT_PROXYUSERPWD] = $proxy_pswd;
         }
